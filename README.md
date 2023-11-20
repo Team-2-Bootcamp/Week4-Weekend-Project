@@ -1,6 +1,6 @@
 # Week4-Weekend-Project
 
-##INTRO
+## INTRO
 
 ## We recommend to follow the below steps to get the above repository working
 - ```bash
