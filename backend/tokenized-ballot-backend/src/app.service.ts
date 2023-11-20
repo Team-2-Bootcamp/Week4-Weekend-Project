@@ -27,9 +27,37 @@ export class AppService {
     );
   }
 
-  async mintTokenForUsers(address: string){
-    const contract = this.contract;
-    const mintTX = await contract.mint(address, MINT_VALUE);
+  async mintTokenForUsers(address: string) {
+    try {
+      console.log("inside mintokenforusersapi");
+      const contract = this.contract;
+      console.log("yes inside mintokenforusers");
+      console.log(address);
+      console.log(this.contract.MINTER_ROLE());
+      console.log(this.wallet)
+      // Check if the caller has the MINTER_ROLE
+      const hasMinterRole = await contract.hasRole(contract.MINTER_ROLE(), this.wallet.address);
+      if (!hasMinterRole) {
+        throw new Error("You don't have the MINTER_ROLE.");
+      }
+      console.log("has minter role");
+      
+      // Mint tokens
+      const mintTX = await contract.mint(address, MINT_VALUE);
+
+      // Wait for the transaction to be mined
+      await mintTX.wait();
+      console.log(
+        `Minted ${MINT_VALUE.toString()} decimal units to account ${
+          address ?? ""
+        }\n`
+      );
+
+      return true;
+    } catch (error) {
+      console.error('Error minting tokens:', error.message);
+      throw error;
+    }
   }
 
   getHello(): string {

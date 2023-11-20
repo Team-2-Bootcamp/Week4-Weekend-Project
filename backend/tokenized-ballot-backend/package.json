@@ -30,6 +30,7 @@
     "@nestjs/cli": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/schematics": "^10.0.0",
+    "@nestjs/swagger": "^7.1.16",
     "@nestjs/testing": "^10.0.0",
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
