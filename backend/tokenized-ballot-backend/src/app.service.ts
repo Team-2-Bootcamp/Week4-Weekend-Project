@@ -52,12 +52,28 @@ export class AppService {
           address ?? ""
         }\n`
       );
+      const balanceBN = await contract.balanceOf(
+        address ?? ""
+      );
+      console.log(
+        `Account ${
+          address ?? ""
+        } has ${balanceBN.toString()} decimal units of MyToken\n`
+      );
 
       return true;
     } catch (error) {
       console.error('Error minting tokens:', error.message);
       throw error;
     }
+  }
+  async getVotes(address: string){
+    const contract = this.contract;
+    const votesAfter = await contract.getVotes(address);
+    console.log(
+      `Account ${address} has ${votesAfter.toString()} units of voting power after delegating\n`
+    );
+    return ethers.formatUnits(votesAfter);
   }
 
   getHello(): string {

@@ -10,7 +10,10 @@ export class AppController {
   async mintTokens(@Body() body: MintTokenDto) {
     return {result: await this.appService.mintTokenForUsers(body.address)};
   }
-
+  @Post('getVotes')
+  async getVotes(@Body() body: MintTokenDto){
+    return {result: await this.appService.getVotes(body.address)}
+  }
   @Get()
   getHello(): string {
     return this.appService.getHello();
